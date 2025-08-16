@@ -5,53 +5,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Row(
     return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
-      // crossAxisAlignment: CrossAxisAlignment.canter,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Container(
-          color: Colors.redAccent,
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: const Text(
-            "Hello",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 3,
-            ),
-          ),
-        ),
-
-        Container(
-          color: Colors.redAccent,
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: const Text(
-            "Hello",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 3,
-            ),
-          ),
-        ),
-        Container(
-          color: Colors.redAccent,
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: const Text(
-            "Hello",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 3,
-            ),
-          ),
-        ),
+        Image.asset('assets/images/1.jpg', width: 200, height: 200),
+        Image.network('https://picsum.photos/200/300', width: 200, height: 200),
       ],
     );
   }
