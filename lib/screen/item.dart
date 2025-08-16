@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_67_1/model/person.dart';
+import 'package:google_fonts/google_fonts.dart'; // ✅ แก้ตรงนี้
 
 class Item extends StatefulWidget {
   const Item({super.key});
@@ -26,15 +27,24 @@ class _ItemState extends State<Item> {
             children: [
               Text(
                 personList[index].name,
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                style: GoogleFonts.kanit(
+                  fontSize: 24,
+                  color: const Color(0xFFFFFFFF),
+                ),
               ),
               Text(
                 "${personList[index].age} ปี",
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                style: GoogleFonts.kanit(
+                  fontSize: 24,
+                  color: const Color(0xFFFFFFFF),
+                ),
               ),
               Text(
-                personList[index].job.title,  // ✅ แก้ตรงนี้
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                personList[index].job.title,
+                style: GoogleFonts.kanit(
+                  fontSize: 24,
+                  color: const Color(0xFFFFFFFF),
+                ),
               ),
             ],
           ),
