@@ -12,7 +12,7 @@ void main() {
       home: Scaffold(
         appBar: AppBar(
           title: Text("My App"),
-          backgroundColor: Colors.indigoAccent,
+          backgroundColor: const Color.fromARGB(255, 255, 69, 205),
           centerTitle: true,
         ),
         body: Home(),
