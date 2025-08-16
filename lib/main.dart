@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'screen/home.dart';
+import 'package:learn_flutter_67_1/screen/home.dart';
+
+import 'package:learn_flutter_67_1/screen/item.dart';
 
 void main() {
   //runApp(const MyApp());
@@ -15,7 +17,7 @@ void main() {
           backgroundColor: const Color.fromARGB(255, 255, 69, 205),
           centerTitle: true,
         ),
-        body: Home(),
+        body: Item(),
       ),
     ),
   );
