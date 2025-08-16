@@ -17,10 +17,10 @@ class _ItemState extends State<Item> {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: const Color.fromARGB(255, 255, 154, 31),
+            color: personList[index].job.color,
           ),
           margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-          padding: EdgeInsets.all(40),
+          padding: const EdgeInsets.all(40),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -33,7 +33,7 @@ class _ItemState extends State<Item> {
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               Text(
-                personList[index].job,
+                personList[index].job.title,  // ✅ แก้ตรงนี้
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ],
