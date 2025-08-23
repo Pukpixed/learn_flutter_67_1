@@ -1,109 +1,240 @@
 import 'package:flutter/material.dart';
+
 import 'package:learn_flutter_67_1/model/person.dart';
 
-class AddForm extends StatefulWidget {
-  const AddForm({super.key});
+class Addform extends StatefulWidget {
+  const Addform({super.key});
 
   @override
-  State<AddForm> createState() => _AddFormState();
+  State<Addform> createState() => _AddformState();
 }
 
-class _AddFormState extends State<AddForm> {
+class _AddformState extends State<Addform> {
   final _formKey = GlobalKey<FormState>();
-  final _nameCtrl = TextEditingController();
-  final _ageCtrl = TextEditingController();
-  Job? _selectedJob;
+  String _name = "";
+  int _age = 20;
+  Job _job = Job.engineer;
 
-  @override
-  void dispose() {
-    _nameCtrl.dispose();
-    _ageCtrl.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Add Person"),
-        backgroundColor: Colors.pinkAccent,
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                controller: _nameCtrl,
-                decoration: const InputDecoration(labelText: "Name"),
-                validator: (v) =>
-                    (v == null || v.trim().isEmpty) ? "กรอกชื่อด้วยครับ" : null,
-              ),
-              TextFormField(
-                controller: _ageCtrl,
-                decoration: const InputDecoration(labelText: "Age"),
-                keyboardType: TextInputType.number,
-                validator: (v) {
-                  if (v == null || v.trim().isEmpty) return "กรอกอายุด้วยครับ";
-                  final n = int.tryParse(v);
-                  if (n == null || n <= 0) return "อายุต้องเป็นจำนวนเต็มบวก";
-                  return null;
-                },
-              ),
-              DropdownButtonFormField<Job>(
-                value: _selectedJob,
-                decoration: const InputDecoration(labelText: "Job"),
-                items: Job.values
-                    .map(
-                      (job) => DropdownMenuItem<Job>(
-                        value: job,
-                        child: Text(job.title), // สมมติว่า model มี field title
-                      ),
-                    )
-                    .toList(),
-                onChanged: (job) {
-                  setState(() {
-                    _selectedJob = job;
-                  });
-                },
-                validator: (v) =>
-                    v == null ? "เลือกอาชีพด้วยครับ" : null,
-              ),
-              const SizedBox(height: 20),
-              FilledButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    final person = Person(
-                      name: _nameCtrl.text.trim(),
-                      age: int.parse(_ageCtrl.text.trim()),
-                      job: _selectedJob!,
-                    );
-
-                    // TODO: ส่ง person กลับหรือบันทึกตามที่ต้องการ
-                    // Navigator.pop(context, person);
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("บันทึกข้อมูลเรียบร้อย")),
-                    );
-                  }
-                },
-                style: FilledButton.styleFrom(
-                  backgroundColor: Colors.pinkAccent,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 50),
-                ),
-                child: const Text(
-                  "Submit",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ],
-          ),
+    return MaterialApp(
+      title: "Add Person",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Add Person"),
+          backgroundColor: Colors.pinkAccent,
+          centerTitle: true,
         ),
+        body: Padding(
+          padding: EdgeInsets.all(15),
+          // child: Column(
+          //  children: [
+          //   TextFormField(
+          //     decoration: InputDecoration(labelText: "Name"),
+          //   ),
+          //   TextFormField(
+          //     decoration: InputDecoration(labelText: "Age"),
+          //     keyboardType: TextInputType.number,
+          //   ),
+          //   DropdownButtonFormField(
+          //   decoration: InputDecoration(labelText: "Job"),
+          //   items: Job.values.map((key) {
+          //     return DropdownMenuItem(
+          //       value: key,
+          //       child: Text(key.title));
+          //   }).toList(),
+          //   onChanged: (value){
+          //     print("value = $value");
+          //   }
+          //   ),
+          //   SizedBox(height: 20),
+          //   FilledButton(
+          //     onPressed: () {}, 
+          //     style: FilledButton.styleFrom(
+          //       backgroundColor: Colors.pinkAccent,
+          //       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+          //     ),
+          //     child: Text(
+          //       "Submit", 
+          //        style: TextStyle(color: Colors.white, fontSize: 20),
+          //   ),
+          //   ),
+          //  ],
+          //   ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: "Name"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter name";
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _name = value!;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: "Age"),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter age";
+                    }
+                    if (int.tryParse(value) == null) {
+                      return "Please enter a valid number";
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _age = int.parse(value!);
+                  },
+                ),
+                DropdownButtonFormField(
+                  value: _job,
+                  decoration: InputDecoration(labelText: "Job"),
+                  items: Job.values.map((key) {
+                    return DropdownMenuItem(
+                      value: key,
+                      child: Text(key.title),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _job = value!;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+              ],
+                  ),
+                ),
+            ),
+          _formKey.currentState!.reset();
       ),
     );
+  }
+}import 'package:flutter/material.dart';
+
+import 'package:learn_flutter_67_1/model/person.dart';
+
+class Addform extends StatefulWidget {
+  const Addform({super.key});
+
+  @override
+  State<Addform> createState() => _AddformState();
+}
+
+class _AddformState extends State<Addform> {
+  final _formKey = GlobalKey<FormState>();
+  String _name = "";
+  int _age = 20;
+  Job _job = Job.engineer;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Add Person",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Add Person"),
+          backgroundColor: Colors.pinkAccent,
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(15),
+          // child: Column(
+          //  children: [
+          //   TextFormField(
+          //     decoration: InputDecoration(labelText: "Name"),
+          //   ),
+          //   TextFormField(
+          //     decoration: InputDecoration(labelText: "Age"),
+          //     keyboardType: TextInputType.number,
+          //   ),
+          //   DropdownButtonFormField(
+          //   decoration: InputDecoration(labelText: "Job"),
+          //   items: Job.values.map((key) {
+          //     return DropdownMenuItem(
+          //       value: key,
+          //       child: Text(key.title));
+          //   }).toList(),
+          //   onChanged: (value){
+          //     print("value = $value");
+          //   }
+          //   ),
+          //   SizedBox(height: 20),
+          //   FilledButton(
+          //     onPressed: () {}, 
+          //     style: FilledButton.styleFrom(
+          //       backgroundColor: Colors.pinkAccent,
+          //       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+          //     ),
+          //     child: Text(
+          //       "Submit", 
+          //        style: TextStyle(color: Colors.white, fontSize: 20),
+          //   ),
+          //   ),
+          //  ],
+          //   ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: "Name"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter name";
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _name = value!;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: "Age"),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter age";
+                    }
+                    if (int.tryParse(value) == null) {
+                      return "Please enter a valid number";
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _age = int.parse(value!);
+                  },
+                ),
+                DropdownButtonFormField(
+                  value: _job,
+                  decoration: InputDecoration(labelText: "Job"),
+                  items: Job.values.map((key) {
+                    return DropdownMenuItem(
+                      value: key,
+                      child: Text(key.title),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _job = value!;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+              ],
+                  ),
+                ),
+            ),
+          ),
+        );
   }
 }
