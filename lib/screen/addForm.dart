@@ -86,6 +86,7 @@ class _AddformState extends State<Addform> {
                       setState(() {
                         personList.add(
                           Person(name: _name, age: _age, job: _job),
+                       
                           );
                       });
                       _formKey.currentState!.reset();

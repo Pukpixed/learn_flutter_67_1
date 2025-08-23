@@ -10,10 +10,10 @@ class Item extends StatefulWidget {
   const Item({super.key});
 
   @override
-  State<Item> createState() => _MyWidgetState();
+  State<Item> createState() => _ItemState();
 }
 
-class _MyWidgetState extends State<Item> {
+class _ItemState extends State<Item> {
  List data = ["สมชาย", "สมหญิง", "สมศรี",  "สมปอง", "สมจิตร" ];
 
   @override
@@ -58,7 +58,7 @@ class _MyWidgetState extends State<Item> {
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: data.length,
+            itemCount: personList.length,
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(
