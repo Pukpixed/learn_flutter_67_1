@@ -1,55 +1,127 @@
 import 'package:flutter/material.dart';
+
 import 'package:learn_flutter_67_1/model/person.dart';
-import 'package:google_fonts/google_fonts.dart'; // ✅ แก้ตรงนี้
+
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:learn_flutter_67_1/screen/addForm.dart';
 
 class Item extends StatefulWidget {
   const Item({super.key});
 
   @override
-  State<Item> createState() => _ItemState();
+  State<Item> createState() => _MyWidgetState();
 }
 
-class _ItemState extends State<Item> {
+class _MyWidgetState extends State<Item> {
+ List data = ["สมชาย", "สมหญิง", "สมศรี",  "สมปอง", "สมจิตร" ];
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: personList.length,
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: personList[index].job.color,
+    // return ListView.builder(
+    //   itemCount: personList.length, 
+    //   itemBuilder: (context, index) {
+    //     return Container(
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(30),
+    //         color: personList[index].job.color,
+    //       ),
+    //       margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+    //       padding: EdgeInsets.all(40),
+    //       child: Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         children: [
+    //           Text(
+    //             personList[index].name,
+    //             //style: TextStyle(color: Colors.white, fontSize: 20),
+    //             style: GoogleFonts.kanit(
+    //               color: Colors.white,
+    //             ),
+    //           ),
+    //           Text(
+    //             "${personList[index].age}ปี",
+    //             style: TextStyle(color: Colors.white, fontSize: 20),
+    //           ),
+    //           Text(
+    //             personList[index].job.title,
+    //             //style: TextStyle(color: Colors.white, fontSize: 20),
+    //              style: GoogleFonts.kanit(
+    //               color: Colors.white,
+    //             ),
+    //           ),
+    //            Image.asset(personList[index].job.image, width: 50, height: 50),
+    //         ],
+    //       ),
+    //     );
+    // });
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  // color: Colors.pinkAccent,
+                  color: personList[index].job.color,
+                ),
+                margin: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                padding: EdgeInsets.all(40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      personList[index].name,
+                      //style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: GoogleFonts.kanit(
+                        fontSize: 24,
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                    Text(
+                      "${personList[index].age}ปี",
+                      // style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: GoogleFonts.kanit(
+                        fontSize: 24,
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                    Text(
+                      personList[index].job.title,
+                      //style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: GoogleFonts.kanit(
+                        fontSize: 24,
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                    Image.asset(
+                      personList[index].job.image,
+                      width: 50,
+                      height: 50,
+                    )
+                  ],
+                ),
+              );
+            },
           ),
-          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-          padding: const EdgeInsets.all(40),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                personList[index].name,
-                style: GoogleFonts.kanit(
-                  fontSize: 24,
-                  color: const Color(0xFFFFFFFF),
-                ),
+        ),
+        SizedBox(
+          height: 100,
+          width: 100,
+          child: IconButton(onPressed: (){
+            Navigator.pushReplacement(
+              context, 
+              MaterialPageRoute(
+                builder: (context) {
+                  return const Addform();
+                },
               ),
-              Text(
-                "${personList[index].age} ปี",
-                style: GoogleFonts.kanit(
-                  fontSize: 24,
-                  color: const Color(0xFFFFFFFF),
-                ),
-              ),
-              Text(
-                personList[index].job.title,
-                style: GoogleFonts.kanit(
-                  fontSize: 24,
-                  color: const Color(0xFFFFFFFF),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+            );
+          },
+          icon: Icon(Icons.add, size: 30,color: Colors.pinkAccent,)),
+        )
+      ],
     );
   }
 }

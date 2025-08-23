@@ -1,23 +1,22 @@
 //class Person {
-//  String name;
-//  int age;
+// String name;
+//int age;
 //  String job;
 
-  // Constructor
-//  Person({required this.name, required this.age, required this.job});
+//Constructor
+// Person({required this.name, required this.age, required this.job});
 //}
 
 //List<Person> personList = [
-//  Person(name: "สมชาย", age: 30, job: "Engineer"),
-//  Person(name: "สมหญิง", age: 28, job: "Doctor"),
-//  Person(name: "สมศรี", age: 25, job: "Teacher"),
-// Person(name: "สมปอง", age: 35, job: "Artist"),
-// Person(name: "สมจิตร", age: 40, job: "Chef"),
+//  Person(name: "สมชาย", age: 20, job: "นักศึกษา"),
+//  Person(name: "สมหญิง", age: 22, job: "พนักงาน"),
+//Person(name: "สมศรี", age: 25, job: "ครู"),
+// Person(name: "สมปอง", age: 30, job: "วิศวกร"),
+//  Person(name: "สมจิตร", age: 28, job: "แพทย์"),
 //];
 
 import 'package:flutter/material.dart';
 
-/// ENUM: อาชีพ (มี title, image, และสี)
 enum Job {
   engineer(
     title: "Engineer",
@@ -32,48 +31,33 @@ enum Job {
   teacher(
     title: "Teacher",
     image: "assets/images/3.jpg",
-    color: Colors.yellow,
+    color: Colors.orange,
   ),
   artist(
     title: "Artist",
     image: "assets/images/4.jpg",
     color: Colors.purple,
-  ),
-  chef(
-    title: "Chef",
-    image: "assets/images/5.jpg",
-    color: Colors.orange,
   );
 
   final String title;
   final String image;
   final Color color;
-
-  const Job({
-    required this.title,
-    required this.image,
-    required this.color,
-  });
+  const Job({required this.title, required this.image, required this.color});
 }
 
-/// CLASS: บุคคล
 class Person {
-  final String name;
-  final int age;
-  final Job job;
+  String name;
+  int age;
+  Job job;
 
-  const Person({
-    required this.name,
-    required this.age,
-    required this.job,
-  });
+  // Constructor
+  Person({required this.name, required this.age, required this.job});
 }
 
-/// รายการบุคคลตัวอย่าง
 List<Person> personList = [
-  const Person(name: "สมชาย", age: 30, job: Job.engineer),
-  const Person(name: "สมหญิง", age: 28, job: Job.doctor),
-  const Person(name: "สมศรี", age: 25, job: Job.teacher),
-  const Person(name: "สมปอง", age: 35, job: Job.artist),
-  const Person(name: "สมจิตร", age: 40, job: Job.chef),
+  Person(name: "สมชาย", age: 20, job: Job.engineer),
+  Person(name: "สมหญิง", age: 22, job: Job.doctor),
+  Person(name: "สมศรี", age: 25, job: Job.teacher),
+  Person(name: "สมปอง", age: 30, job: Job.artist),
+  Person(name: "สมจิตร", age: 28, job: Job.engineer),
 ];

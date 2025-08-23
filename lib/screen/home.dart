@@ -10,7 +10,9 @@ class home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton(
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.red,
+            ),
             onPressed: () {
               print("Button Pressed");
             },
@@ -21,7 +23,7 @@ class home extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           FilledButton(
-            style: FilledButton.styleFrom(
+          style: FilledButton.styleFrom(
               backgroundColor: Colors.pinkAccent,
               foregroundColor: Colors.white,
             ),
@@ -32,12 +34,15 @@ class home extends StatelessWidget {
               "Click Me",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-          ),
-          const SizedBox(height: 20),
+          ), 
+           const SizedBox(height: 20),
           OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.pinkAccent,
-              side: const BorderSide(color: Colors.pinkAccent, width: 2),
+          style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.red,
+              side: const BorderSide(
+                color: Colors.pinkAccent,
+                width: 2,
+              ),
             ),
             onPressed: () {
               print("Outlined Button Pressed");
@@ -49,20 +54,23 @@ class home extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.pinkAccent,
-              side: const BorderSide(color: Colors.white, width: 2),
+          style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.red,
+              side: const BorderSide(
+                color: Colors.pinkAccent,
+                width: 2,
+              ),
             ),
             onPressed: () {
-              print("Outlined Button Pressed");
+              print("Elevated Button Pressed");
             },
             child: const Text(
               "Click Me",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-          ),
+          ),                                   
         ],
-      ),
+      )
     );
   }
 }
